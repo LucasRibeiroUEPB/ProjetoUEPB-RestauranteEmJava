@@ -11,6 +11,6 @@ public class Mesa {
 		this.pedidos_da_mesa = new Pedido[capacidade_de_pedidos];
 		this.Total_mesa = 0;
 	}
-	//public boolean Adicionar_Pedido();
+	//public boolean Adicionar_Pedido() parte 2
 
 }
