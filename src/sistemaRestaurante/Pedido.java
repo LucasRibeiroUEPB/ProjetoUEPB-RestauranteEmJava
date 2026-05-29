@@ -9,10 +9,10 @@ public class Pedido {
 		this.valorDoItem = valorDoItem;
 		this.quantidade = quantidade;
 	}
-	double calculaValorTotalDoPedido() {
+	double calcularValorTotalDoPedido() {
 		return valorDoItem * quantidade;
 	}
 	public String toString() {
-		return "Pedido: " + nomeDoItem + " Valor Unitário R$: " + valorDoItem + " Quantidade: " + quantidade + " Total: R$" + calculaValorTotalDoPedido(); 
+		return "Pedido: " + nomeDoItem + " Valor Unitário R$: " + valorDoItem + " Quantidade: " + quantidade + " Total: R$" + calcularValorTotalDoPedido(); 
 	}
 }
