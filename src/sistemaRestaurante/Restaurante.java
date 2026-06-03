@@ -43,7 +43,7 @@ public class Restaurante {
 			boolean sucesso = mesaEncontrada.adicionarPedido(NovoPedido);
 			
 			if(sucesso) {
-				return "Peido de " +item+ "adicionado a mesa " +numeroMesa;
+				return "Pedido de " +item+ "adicionado a mesa " +numeroMesa;
 			}
 			else {
 				return "A mesa atingiu a capacidade máxima de pedidos";
