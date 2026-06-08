@@ -2,7 +2,6 @@ package sistemaRestaurante;
 
 public class Restaurante {
 	Mesa mesas[];
-	String cardapio[];
 	int totalMesas;
 
 	Restaurante(int capacidadeMesas) {
@@ -11,8 +10,8 @@ public class Restaurante {
 	}
 
 	public Mesa buscarMesaPorNumero(int numero) {
-		for (int i = 0; i < this.mesas.length; i++) {
-			if (this.mesas[i] != null && this.mesas[i].numeroDaMesa == numero) {
+		for (int i = 0; i < totalMesas; i++) {
+			if (this.mesas[i].numeroDaMesa == numero) {
 				return this.mesas[i];
 			}
 		}
@@ -23,13 +22,10 @@ public class Restaurante {
 		if (buscarMesaPorNumero(numero) != null) {
 			return "Erro: a mesa " + numero + " já existe no sistema";
 		}
-
-		for (int i = 0; i < this.mesas.length; i++) {
-			if (this.mesas[i] == null) {
-				this.mesas[i] = new Mesa(numero, capacidadePedidos);
-				this.totalMesas++;
-				return "Mesa " + numero + " está aberta";
-			}
+		if (totalMesas < mesas.length) {
+			this.mesas[totalMesas] = new Mesa(numero, capacidadePedidos);
+			this.totalMesas++;
+			return "Mesa " + numero + " aberta com sucesso!";
 		}
 		return "O restaurante não tem capacidade para novas mesas";
 	}
@@ -37,7 +33,7 @@ public class Restaurante {
 	public String adicionarPedidoEmMesa(int numeroMesa, String item, double preco, int quantidade) {
 		Mesa mesaEncontrada = buscarMesaPorNumero(numeroMesa);
 
-		if (mesaEncontrada != null && mesaEncontrada.mesa_ativa) {
+		if (mesaEncontrada != null) {
 			Pedido NovoPedido = new Pedido(item, preco, quantidade);
 			boolean sucesso = mesaEncontrada.adicionarPedido(NovoPedido);
 
@@ -51,11 +47,14 @@ public class Restaurante {
 	}
 
 	public String fecharMesa(int numeroMesa) {
-		for (int i = 0; i < this.mesas.length; i++) {
-			if (this.mesas[i] != null && this.mesas[i].numeroDaMesa == numeroMesa) {
+		for (int i = 0; i < totalMesas; i++) {
+			if (this.mesas[i].numeroDaMesa == numeroMesa) {
 				double totalConta = this.mesas[i].calcularValorTotalDaMesa();
 				this.mesas[i].encerrarMesa();
-				this.mesas[i] = null;
+				for (int j = i; j < totalMesas - 1; j++) {
+					this.mesas[j] = this.mesas[j + 1];
+				}
+				this.mesas[totalMesas - 1] = null;
 				this.totalMesas--;
 				return "Mesa " + numeroMesa + " encerrada. Total a pagar: R$ " + totalConta;
 			}
@@ -67,11 +66,9 @@ public class Restaurante {
 		String lista = "\n==== MESAS ATIVAS ====\n";
 		boolean temMesa = false;
 
-		for (int i = 0; i < this.mesas.length; i++) {
-			if (this.mesas[i] != null && this.mesas[i].mesa_ativa) {
-				lista += this.mesas[i].toString() + "\n";
-				temMesa = true;
-			}
+		for (int i = 0; i < totalMesas; i++) {
+			lista += this.mesas[i].toString() + "\n";
+			temMesa = true;
 		}
 		if (!temMesa) {
 			return "Nenhuma mesa ativa no momento.";

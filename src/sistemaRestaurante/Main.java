@@ -8,17 +8,21 @@ public class Main {
 
 	static String lerTexto(String mensagem) {
 		System.out.print(mensagem);
-		return scan.next();
+		return scan.nextLine();
 	}
 
 	static int lerInteiro(String mensagem) {
 		System.out.print(mensagem);
-		return scan.nextInt();
+		int valor = scan.nextInt();
+		scan.nextLine();
+		return valor;
 	}
 
 	static double lerDouble(String mensagem) {
 		System.out.print(mensagem);
-		return scan.nextDouble();
+		double valor = scan.nextDouble();
+		scan.nextLine();
+		return valor;
 	}
 
 	static void abrirMesa(Restaurante restaurante) {
@@ -78,13 +82,14 @@ public class Main {
 				listarMesasAtivas(restaurante);
 				break;
 			case 0:
-				System.out.println("Programa Encerrado!");
+				break;
 			default:
 				System.out.println("Opção inválida");
 			}
 			mostrarMenu();
 			opcao = lerInteiro("Selecione a opção:");
 		}
+		System.out.println("Programa Encerrado!");
 	}
 
 }
