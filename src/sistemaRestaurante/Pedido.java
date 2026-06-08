@@ -17,6 +17,6 @@ public class Pedido {
 
 	public String toString() {
 		return "Item: " + nomeDoItem + "| Valor Unitário R$: " + valorDoItem + "| Quantidade: " + quantidade
-				+ "| Total: R$" + calcularValorTotalDoPedido();
+				+ "| Total: R$" + calcularValorTotalDoPedido()+"\n";
 	}
 }

@@ -24,6 +24,12 @@ public class Main {
 		scan.nextLine();
 		return valor;
 	}
+	
+	static void pausaParaLer() {
+		System.out.print("\n");
+		System.out.print("Digite qualquer tecla para continuar:");
+		scan.nextLine();	
+	}
 
 	static void abrirMesa(Restaurante restaurante) {
 		int numero = lerInteiro("Qual o número da mesa?:");
@@ -71,22 +77,27 @@ public class Main {
 			switch (opcao) {
 			case 1: {
 				abrirMesa(restaurante);
+				pausaParaLer();
 				break;
 			}
 			case 2:
 				adicionarPedido(restaurante);
+				pausaParaLer();
 				break;
 			case 3:
 				fecharMesa(restaurante);
+				pausaParaLer();
 				break;
 			case 4:
 				listarMesasAtivas(restaurante);
+				pausaParaLer();
 				break;
 			case 0:
 				break;
 			default:
 				System.out.println("Opção inválida");
 			}
+			System.out.println(restaurante);
 			mostrarMenu();
 			opcao = lerInteiro("Selecione a opção:");
 		}
