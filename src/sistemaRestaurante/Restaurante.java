@@ -9,7 +9,7 @@ public class Restaurante {
 		this.totalMesas = 0;
 	}
 
-	public Mesa buscarMesaPorNumero(int numero) {
+	Mesa buscarMesaPorNumero(int numero) {
 		for (int i = 0; i < totalMesas; i++) {
 			if (this.mesas[i].numeroDaMesa == numero) {
 				return this.mesas[i];
@@ -18,7 +18,7 @@ public class Restaurante {
 		return null;
 	}
 
-	public String abrirMesa(int numero, int capacidadePedidos) {
+	String abrirMesa(int numero, int capacidadePedidos) {
 		if (buscarMesaPorNumero(numero) != null) {
 			return "Erro: a mesa " + numero + " já existe no sistema";
 		}
@@ -30,7 +30,7 @@ public class Restaurante {
 		return "O restaurante não tem capacidade para novas mesas";
 	}
 
-	public String adicionarPedidoEmMesa(int numeroMesa, String item, double preco, int quantidade) {
+	String adicionarPedidoEmMesa(int numeroMesa, String item, double preco, int quantidade) {
 		Mesa mesaEncontrada = buscarMesaPorNumero(numeroMesa);
 
 		if (mesaEncontrada != null) {
@@ -46,7 +46,7 @@ public class Restaurante {
 		return "Mesa não encontrada ou fechada";
 	}
 
-	public String fecharMesa(int numeroMesa) {
+	String fecharMesa(int numeroMesa) {
 		for (int i = 0; i < totalMesas; i++) {
 			if (this.mesas[i].numeroDaMesa == numeroMesa) {
 				double totalConta = this.mesas[i].calcularValorTotalDaMesa();
@@ -62,7 +62,7 @@ public class Restaurante {
 		return "Mesa não encontrada ou já está fechada";
 	}
 
-	public String listarMesasAtivas() {
+	String listarMesasAtivas() {
 		String lista = "\n==== MESAS ATIVAS ====\n";
 		boolean temMesa = false;
 

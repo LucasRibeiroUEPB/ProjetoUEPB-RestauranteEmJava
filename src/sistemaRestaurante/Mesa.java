@@ -6,7 +6,7 @@ public class Mesa {
 	Pedido[] pedidos_da_mesa;
 	int quantidadeDePedidos;
 
-	public Mesa(int numero, int capacidade_de_pedidos) {
+	Mesa(int numero, int capacidade_de_pedidos) {
 		this.numeroDaMesa = numero;
 		this.mesa_ativa = true;
 		this.pedidos_da_mesa = new Pedido[capacidade_de_pedidos];
