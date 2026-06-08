@@ -27,9 +27,8 @@ public class Restaurante {
 		for (int i = 0; i < this.mesas.length; i++) {
 			if (this.mesas[i] == null) {
 				this.mesas[i] = new Mesa(numero, capacidadePedidos);
-				this.mesas[i].mesa_ativa = true;
 				this.totalMesas++;
-				return "Mesa " + numero + " aberta com sucesso!";
+				return "Mesa " + numero + " está aberta";
 			}
 		}
 		return "O restaurante não tem capacidade para novas mesas";
@@ -52,35 +51,35 @@ public class Restaurante {
 	}
 
 	public String fecharMesa(int numeroMesa) {
-		Mesa mesaEncontrada = buscarMesaPorNumero(numeroMesa);
-
-		if (mesaEncontrada != null && mesaEncontrada.mesa_ativa) {
-			double totalConta = mesaEncontrada.calcularValorTotalDaMesa();
-			mesaEncontrada.mesa_ativa = false;
-
-			return "Mesa " + numeroMesa + " encerrada. Total a pagar: R$ " + totalConta;
+		for (int i = 0; i < this.mesas.length; i++) {
+			if (this.mesas[i] != null && this.mesas[i].numeroDaMesa == numeroMesa) {
+				double totalConta = this.mesas[i].calcularValorTotalDaMesa();
+				this.mesas[i].encerrarMesa();
+				this.mesas[i] = null;
+				this.totalMesas--;
+				return "Mesa " + numeroMesa + " encerrada. Total a pagar: R$ " + totalConta;
+			}
 		}
 		return "Mesa não encontrada ou já está fechada";
 	}
 
 	public String listarMesasAtivas() {
-		String lista = "\n==== MESAS ATIVA ====\n";
+		String lista = "\n==== MESAS ATIVAS ====\n";
 		boolean temMesa = false;
 
 		for (int i = 0; i < this.mesas.length; i++) {
 			if (this.mesas[i] != null && this.mesas[i].mesa_ativa) {
-				lista += "Mesa " + this.mesas[i].numeroDaMesa + "| Pedidos: " + this.mesas[i].quantidadeDePedidos
-						+ "\n";
+				lista += this.mesas[i].toString() + "\n";
 				temMesa = true;
 			}
 		}
 		if (!temMesa) {
-			return "Nenhuma mesa ativa";
+			return "Nenhuma mesa ativa no momento.";
 		}
 		return lista;
 	}
 
 	public String toString() {
-		return "Restaurante com " + this.totalMesas + "mesas abertas";
+		return "Restaurante com " + this.totalMesas + " mesas abertas";
 	}
 }

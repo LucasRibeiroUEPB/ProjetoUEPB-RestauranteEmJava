@@ -23,18 +23,23 @@ public class Mesa {
 
 	double calcularValorTotalDaMesa() {
 		double soma = 0;
-		for (Pedido meusPedidos : pedidos_da_mesa) {
-			if (meusPedidos != null) {
-				soma += meusPedidos.calcularValorTotalDoPedido();
+		if (pedidos_da_mesa != null) {
+			for (Pedido meusPedidos : pedidos_da_mesa) {
+				if (meusPedidos != null) {
+					soma += meusPedidos.calcularValorTotalDoPedido();
+				}
 			}
-
 		}
 		return soma;
 	}
 
 	void listarPedidos() {
-		for (Pedido meusPedidos : pedidos_da_mesa) {
-			System.out.println(meusPedidos);
+		if (pedidos_da_mesa != null) {
+			for (Pedido meusPedidos : pedidos_da_mesa) {
+				if (meusPedidos != null) {
+					System.out.println(meusPedidos.toString());
+				}
+			}
 		}
 	}
 
@@ -46,12 +51,7 @@ public class Mesa {
 
 	public String toString() {
 		String status;
-		String total;
-		if (pedidos_da_mesa != null) {
-			total = "R$" + calcularValorTotalDaMesa();
-		} else {
-			total = "R$ 0.00";
-		}
+
 		if (mesa_ativa) {
 			status = "aberta";
 		} else {
@@ -59,7 +59,6 @@ public class Mesa {
 		}
 
 		return "Mesa " + numeroDaMesa + " | " + "Status: " + status + " | " + "Total de pedidos: " + quantidadeDePedidos
-				+ " | " + "Total a pagar: " + total;
+				+ " | " + "Total a pagar: R$" + calcularValorTotalDaMesa();
 	}
-
 }

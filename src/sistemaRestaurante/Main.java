@@ -77,6 +77,8 @@ public class Main {
 			case 4:
 				listarMesasAtivas(restaurante);
 				break;
+			case 0:
+				System.out.println("Programa Encerrado!");
 			default:
 				System.out.println("Opção inválida");
 			}
