@@ -59,6 +59,7 @@ public class Main {
 		System.out.println("2 - Adicionar Pedido");
 		System.out.println("3 - Fechar Mesa");
 		System.out.println("4 - Listar Mesas Ativas");
+		System.out.println("0 - Encerrar programa");
 	}
 
 	public static void main(String[] args) {
