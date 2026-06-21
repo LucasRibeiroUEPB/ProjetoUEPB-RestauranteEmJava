@@ -1,30 +1,32 @@
 package sistemaRestaurante;
 
+
+
 public class Mesa {
 	int numeroDaMesa;
 	boolean mesa_ativa = false;
 	Pedido[] pedidos_da_mesa;
-	int quantidadeDePedidos;
 
-	Mesa(int numero, int capacidade_de_pedidos) {
+	Mesa(int numero) {
 		this.numeroDaMesa = numero;
 		this.mesa_ativa = true;
-		this.pedidos_da_mesa = new Pedido[capacidade_de_pedidos];
-		this.quantidadeDePedidos = 0;
+		this.pedidos_da_mesa = new Pedido[0];
 	}
 
 	boolean adicionarPedido(Pedido novoPedido) {
-		if (quantidadeDePedidos < pedidos_da_mesa.length) {
-			pedidos_da_mesa[quantidadeDePedidos] = novoPedido;
-			quantidadeDePedidos++;
-			return true;
-		}
-		return false;
+	    Pedido[] auxiliar = new Pedido[pedidos_da_mesa.length + 1];
+	    for (int i = 0; i < pedidos_da_mesa.length; i++) {
+	        auxiliar[i] = pedidos_da_mesa[i];
+	    }
+	    pedidos_da_mesa = auxiliar;
+	    pedidos_da_mesa[pedidos_da_mesa.length - 1] = novoPedido;
+	    return true;
 	}
-
+	
+	
 	double calcularValorTotalDaMesa() {
 		double soma = 0;
-		for (int i = 0; i < quantidadeDePedidos; i++) {
+		for (int i = 0; i < pedidos_da_mesa.length; i++) {
 			soma += pedidos_da_mesa[i].calcularValorTotalDoPedido();
 		}
 		return soma;
@@ -32,7 +34,7 @@ public class Mesa {
 
 	String listarPedidos() {
 		String pedidos = "Pedidos:\n";
-		for (int i = 0; i < quantidadeDePedidos; i++) {
+		for (int i = 0; i < pedidos_da_mesa.length; i++) {
 			pedidos += pedidos_da_mesa[i].toString();
 		}
 		return pedidos;
@@ -41,7 +43,6 @@ public class Mesa {
 	void encerrarMesa() {
 		mesa_ativa = false;
 		pedidos_da_mesa = null;
-		quantidadeDePedidos = 0;
 	}
 
 	public String toString() {
@@ -52,7 +53,7 @@ public class Mesa {
 			status = "fechada";
 		}
 
-		return "Mesa " + numeroDaMesa + " | " + "Status: " + status + " | " + "Total de pedidos: " + quantidadeDePedidos
+		return "Mesa " + numeroDaMesa + " | " + "Status: " + status + " | " + "Total de pedidos: " + pedidos_da_mesa.length
 				+ " | " + "Total a pagar: R$" + calcularValorTotalDaMesa() + "|" + listarPedidos();
 	}
 }

@@ -18,12 +18,12 @@ public class Restaurante {
 		return null;
 	}
 
-	String abrirMesa(int numero, int capacidadePedidos) {
+	String abrirMesa(int numero) {
 		if (buscarMesaPorNumero(numero) != null) {
 			return "Erro: a mesa " + numero + " já existe no sistema";
 		}
 		if (totalMesas < mesas.length) {
-			this.mesas[totalMesas] = new Mesa(numero, capacidadePedidos);
+			this.mesas[totalMesas] = new Mesa(numero);
 			this.totalMesas++;
 			return "Mesa " + numero + " aberta com sucesso!";
 		}

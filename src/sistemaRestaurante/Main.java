@@ -33,8 +33,7 @@ public class Main {
 
 	static void abrirMesa(Restaurante restaurante) {
 		int numero = lerInteiro("Qual o número da mesa?:");
-		int capacidadePedidos = lerInteiro("Qual a capacidade de pedidos da mesa?:");
-		String operação = restaurante.abrirMesa(numero, capacidadePedidos);
+		String operação = restaurante.abrirMesa(numero);
 		System.out.println(operação);
 
 	}
